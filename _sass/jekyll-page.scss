@@ -1,0 +1,91 @@
+
+@import "fonts";
+@import "rouge-github";
+
+.columns_page {
+  display: flex;
+  gap: 60px;
+}
+
+.column_nav {
+  flex: 1;
+  position: sticky;
+  top: 1vh;
+  align-self: flex-start;
+}
+.column_content {
+  flex: 3;
+}
+ul.pagenav_list{
+  list-style-image: url("/assets/page.png");
+  font-size:14px;
+}
+ul.pagenav_list a{
+  color:#566e8b;
+  border-bottom: none;
+  text-decoration: none;  
+}
+ul.pagenav_list a:hover{
+  color:#4a8eff;
+  border-bottom: none;
+  text-decoration: none;  
+}
+h1.page_title {
+  color:#3f5876;
+  font-weight:600;
+}
+ol.page_guide a{
+   text-decoration: none;
+   color: #566e8b;
+   font-weight: 600;
+   line-height: 1.6;
+   display: inline-block;
+}
+
+ol.page_guide a:hover,a:focus{
+   color: #4a8eff;
+}
+ol.name_list a,ol.name_list li:before{
+  font-size:20px;
+}
+ol.name_list{
+      margin: 0 0 10px;
+}
+.content_block{
+  display: flex;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.content_block p{
+  flex: 2;
+}
+.content_block .content_img{
+  flex: 1;
+}
+  
+@media print, screen and (max-width: 960px) {
+.columns_page {
+  display: block;
+  }
+.column_nav {
+  display:none;
+  }
+.content_block{
+  flex-direction: column
+  }
+}
+
+@media print, screen and (max-width: 720px) {
+
+ 
+}
+
+@media print, screen and (max-width: 480px) {
+
+
+}
+
+@media print {
+
+}
