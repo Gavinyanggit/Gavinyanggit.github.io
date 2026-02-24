@@ -1,168 +1,107 @@
 ---
 layout: default
-title: RAG for Older Adult Mobility and Health Information
-permalink: /RAG-older-adult-mobility/
+title: RAG for Older Adult Mobility and Health Information (HTML)
+permalink: /RAG-older-adult-mobility-html/
 ---
+
 <style>
-.container {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 28px 20px 60px;
-  }
-  h1,
-  h2,
-  h3 {
-    line-height: 1.2;
-  }
-  h1 {
-    margin-top: 0;
-  }
-  hr {
-    border: 0;
-    border-top: 1px solid #e5e7eb;
-    margin: 22px 0;
-  }
-  code,
-  pre {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
-      monospace;
-  }
-  pre {
-    background: #0b1021;
-    color: #e5e7eb;
-    padding: 14px 16px;
-    overflow: auto;
-    border-radius: 10px;
-  }
-  code {
-    background: #f3f4f6;
-    padding: 0.15em 0.35em;
-    border-radius: 6px;
-  }
-  pre code {
-    background: transparent;
-    padding: 0;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 14px 0;
-  }
-  th,
-  td {
-    border: 1px solid #e5e7eb;
-    padding: 8px 10px;
-    text-align: left;
-    vertical-align: top;
-  }
-  th {
-    background: #f9fafb;
-  }
-  a {
-    color: #0a66c2;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  blockquote {
-    border-left: 4px solid #e5e7eb;
-    margin: 14px 0;
-    padding: 4px 14px;
-    color: #374151;
-  }
-  ul,
-  ol {
-    padding-left: 1.2rem;
-  }
-
-  .compact-table {
-    width: auto;
-    margin: 15px 0; /* LEFT aligned (no auto center) */
-    border-collapse: collapse;
-    font-size: 0.9rem;
-    min-width: 520px;
-  }
-
-  .compact-table th,
-  .compact-table td {
-    padding: 6px 10px;
-    border: 1px solid #e5e7eb;
-    text-align: center;
-  }
-
-  .compact-table th {
-    background-color: #f3f4f6;
-    font-weight: 600;
-  }
-
-  .compact-table tbody tr:nth-child(even) {
-    background-color: #fafafa;
-  }
-  
-/* Scope styles so you don't break the site's theme */
+/* Scope everything to this page only */
 .rag-wrap { max-width: 980px; }
-.rag-wrap table { width: auto; max-width: 100%; margin: 10px 0; border-collapse: collapse; font-size: 0.95rem; }
-.rag-wrap th, .rag-wrap td { border: 1px solid #e5e7eb; padding: 6px 10px; text-align: left; }
-.rag-wrap th { background: #f9fafb; }
-.rag-wrap .compact-table { width: auto; margin-left: 0; margin-right: auto; } /* LEFT aligned */
+
+/* Make lists look normal (theme sometimes overrides) */
+.rag-wrap ul,
+.rag-wrap ol {
+  padding-left: 1.2rem !important;
+  margin: 0.6rem 0 !important;
+}
+.rag-wrap li {
+  margin: 0.25rem 0 !important;
+}
+.rag-wrap ul { list-style: disc !important; }
+.rag-wrap ul ul { list-style: circle !important; }
+.rag-wrap ol { list-style: decimal !important; }
+
+/* Tables: smaller + LEFT aligned + responsive */
+.rag-wrap table {
+  width: auto !important;
+  max-width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 12px 0 !important;        /* left aligned */
+  font-size: 0.92rem !important;
+}
+.rag-wrap th, .rag-wrap td {
+  border: 1px solid #e5e7eb !important;
+  padding: 6px 10px !important;
+  text-align: left !important;
+  vertical-align: top !important;
+}
+.rag-wrap th { background: #f9fafb !important; }
+
+/* Optional: allow horizontal scroll on small screens */
+.rag-wrap .table-scroll {
+  overflow-x: auto;
+}
+.rag-wrap .table-scroll table {
+  min-width: 520px;
+}
+
+/* References: wrap long URLs nicely */
+.rag-wrap a { word-break: break-word; }
 </style>
 
 <div class="rag-wrap">
 
-  <!-- ✅ Paste ONLY your page body here (NO <!doctype>, NO <html>, NO <head>, NO <body>) -->
-
-  <h1 id="retrieval-augmented-generation-rag-for-older-adult-mobility-and-health-information">
-    Retrieval-Augmented Generation (RAG) for Older Adult Mobility and Health Information
-  </h1>
+  <h1>Retrieval-Augmented Generation (RAG) for Older Adult Mobility and Health Information</h1>
 
   <p>
-    <strong>Author:</strong> Jia Yang<br />
-    <strong>Supervisor:</strong> Dr. Rong Zheng<br />
+    <strong>Author:</strong> Jia Yang<br/>
+    <strong>Supervisor:</strong> Dr. Rong Zheng<br/>
     <strong>Institution:</strong> McMaster University
   </p>
 
-  <!-- ...keep the rest of your content... -->
+  <!-- Put your content here (tables/lists/etc.) -->
 
   <h2 id="4-references">4. References</h2>
   <ul>
     <li>
       Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W. T.,
       Rocktäschel, T., Riedel, S., &amp; Kiela, D. (2020).
-      <em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</em>.
-      NeurIPS 2020, 33, 9459–9474.<br />
+      <em>Retrieval-augmented generation for knowledge-intensive NLP tasks</em>. NeurIPS 2020, 33, 9459–9474.<br/>
       <a href="https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html" target="_blank" rel="noopener noreferrer">
         https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
       </a>
     </li>
 
     <li>
-      Izacard, G., &amp; Grave, E. (2021).
-      <em>Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering</em>. EACL 2021.<br />
-      <a href="https://arxiv.org/abs/2007.01282" target="_blank" rel="noopener noreferrer">
-        https://arxiv.org/abs/2007.01282
-      </a>
+      Nogueira, R., &amp; Cho, K. (2019). <em>Passage re-ranking with BERT</em>. arXiv:1901.04085.<br/>
+      <a href="https://arxiv.org/abs/1901.04085" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/1901.04085</a>
     </li>
 
     <li>
-      Nogueira, R., &amp; Cho, K. (2019).
-      <em>Passage Re-ranking with BERT</em>. arXiv:1901.04085.<br />
-      <a href="https://arxiv.org/abs/1901.04085" target="_blank" rel="noopener noreferrer">
-        https://arxiv.org/abs/1901.04085
-      </a>
+      OpenAI. (2023). <em>GPT-4 technical report</em>. arXiv:2303.08774.<br/>
+      <a href="https://arxiv.org/abs/2303.08774" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2303.08774</a>
+    </li>
+
+    <li>
+      Izacard, G., &amp; Grave, E. (2021). <em>Leveraging passage retrieval with generative models for open-domain question answering</em>. EACL 2021.<br/>
+      <a href="https://arxiv.org/abs/2007.01282" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2007.01282</a>
     </li>
 
     <li>
       Thakur, N., Reimers, N., Rücklé, A., Srivastava, A., &amp; Gurevych, I. (2021).
-      <em>BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models</em>. NeurIPS 2021.<br />
-      <a href="https://arxiv.org/abs/2104.08663" target="_blank" rel="noopener noreferrer">
-        https://arxiv.org/abs/2104.08663
+      <em>BEIR: A heterogeneous benchmark for zero-shot evaluation of information retrieval models</em>. NeurIPS 2021.<br/>
+      <a href="https://arxiv.org/abs/2104.08663" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2104.08663</a>
+    </li>
+
+    <li>
+      National Institute on Aging. (2023). <em>Falls and falls prevention</em>.<br/>
+      <a href="https://www.nia.nih.gov/health/falls-and-falls-prevention" target="_blank" rel="noopener noreferrer">
+        https://www.nia.nih.gov/health/falls-and-falls-prevention
       </a>
     </li>
 
     <li>
-      World Health Organization. (2022). <em>Healthy ageing</em>.<br />
+      World Health Organization. (2022). <em>Healthy ageing</em>.<br/>
       <a href="https://www.who.int/health-topics/ageing" target="_blank" rel="noopener noreferrer">
         https://www.who.int/health-topics/ageing
       </a>
