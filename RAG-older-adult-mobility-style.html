@@ -1,0 +1,155 @@
+
+<!-- Production-ready Jekyll page:
+     - No <style> block (avoids theme conflicts)
+     - Inline styles only
+     - Keeps your theme top nav + left sidebar because of layout: default
+-->
+
+<div style="max-width: 980px; margin: 0; padding: 0;">
+
+  <h1 style="margin: 0 0 10px 0; line-height: 1.2; font-size: 2rem; font-weight: 800; color: #111;">
+    Retrieval-Augmented Generation (RAG) for Older Adult Mobility and Health Information
+  </h1>
+
+  <div style="margin: 0 0 14px 0; font-size: 0.95rem; color: #111;">
+    <div><strong>Author:</strong> Jia Yang</div>
+    <div><strong>Supervisor:</strong> Dr. Rong Zheng</div>
+    <div><strong>Institution:</strong> McMaster University</div>
+  </div>
+
+  <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 18px 0;" />
+
+  <h2 style="margin: 0 0 10px 0; font-size: 1.35rem; font-weight: 800; color: #111;">Table of Contents</h2>
+  <ol style="padding-left: 1.2rem; margin: 0.4rem 0 0.9rem 0; line-height: 1.6;">
+    <li style="margin: 0.15rem 0;">
+      <a href="#sec1" style="text-decoration: none;">Project Description and Approach</a>
+      <ul style="padding-left: 1.2rem; margin: 0.35rem 0 0.5rem 0; list-style-type: disc;">
+        <li style="margin: 0.1rem 0;"><a href="#sec1-1" style="text-decoration: none;">Motivation</a></li>
+        <li style="margin: 0.1rem 0;"><a href="#sec1-2" style="text-decoration: none;">System Overview</a></li>
+        <li style="margin: 0.1rem 0;"><a href="#sec1-3" style="text-decoration: none;">Key Design Features</a></li>
+        <li style="margin: 0.1rem 0;"><a href="#sec1-4" style="text-decoration: none;">Architecture Components</a></li>
+      </ul>
+    </li>
+    <li style="margin: 0.15rem 0;">
+      <a href="#sec2" style="text-decoration: none;">Results</a>
+      <ul style="padding-left: 1.2rem; margin: 0.35rem 0 0.5rem 0; list-style-type: disc;">
+        <li style="margin: 0.1rem 0;"><a href="#sec2-1" style="text-decoration: none;">Retrieval Performance (BEIR Benchmark)</a></li>
+        <li style="margin: 0.1rem 0;"><a href="#sec2-2" style="text-decoration: none;">Local vs Web Retrieval</a></li>
+        <li style="margin: 0.1rem 0;"><a href="#sec2-3" style="text-decoration: none;">Qualitative Evaluation</a></li>
+      </ul>
+    </li>
+    <li style="margin: 0.15rem 0;"><a href="#sec3" style="text-decoration: none;">Source Code</a></li>
+    <li style="margin: 0.15rem 0;"><a href="#sec4" style="text-decoration: none;">References</a></li>
+  </ol>
+
+  <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 18px 0;" />
+
+  <h2 id="sec1" style="margin: 0 0 8px 0; font-size: 1.35rem; font-weight: 800; color: #111;">
+    1. Project Description and Approach
+  </h2>
+
+  <h3 id="sec1-1" style="margin: 10px 0 6px 0; font-size: 1.05rem; font-weight: 800; color: #111;">
+    1.1 Motivation
+  </h3>
+
+  <p style="margin: 0 0 10px 0; color: #111; line-height: 1.6;">
+    Older adults increasingly rely on online resources for health information related to mobility, fall prevention,
+    balance training, and rehabilitation. However:
+  </p>
+
+  <ul style="padding-left: 1.2rem; margin: 0.4rem 0 0.9rem 0; list-style-type: disc; line-height: 1.6;">
+    <li style="margin: 0.15rem 0;">Search engines often return fragmented or unreliable results.</li>
+    <li style="margin: 0.15rem 0;">Large Language Models (LLMs) may generate fluent but unverified responses.</li>
+    <li style="margin: 0.15rem 0;">Health misinformation can negatively impact safety and decision-making.</li>
+  </ul>
+
+  <p style="margin: 0 0 14px 0; color: #111; line-height: 1.6;">
+    This project develops a reliable, citation-grounded <strong>Retrieval-Augmented Generation (RAG)</strong> system
+    designed specifically for older-adult mobility and health information.
+  </p>
+
+  <h3 id="sec1-2" style="margin: 14px 0 6px 0; font-size: 1.05rem; font-weight: 800; color: #111;">
+    1.2 System Overview
+  </h3>
+
+  <p style="margin: 0 0 8px 0; color: #111; line-height: 1.6;">The system integrates:</p>
+
+  <ul style="padding-left: 1.2rem; margin: 0.4rem 0 0.9rem 0; list-style-type: disc; line-height: 1.6;">
+    <li style="margin: 0.15rem 0;"><strong>BM25</strong> lexical retrieval</li>
+    <li style="margin: 0.15rem 0;"><strong>Cross-encoder</strong> semantic reranking</li>
+    <li style="margin: 0.15rem 0;"><strong>Relevance-gating mechanism</strong> (CE threshold τ = 0.6)</li>
+    <li style="margin: 0.15rem 0;"><strong>Google Search API</strong> web fallback</li>
+    <li style="margin: 0.15rem 0;"><strong>LLM-based</strong> answer generation with explicit citations</li>
+  </ul>
+
+  <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 18px 0;" />
+
+  <h2 id="sec2" style="margin: 0 0 8px 0; font-size: 1.35rem; font-weight: 800; color: #111;">
+    2. Results
+  </h2>
+
+  <h3 id="sec2-1" style="margin: 10px 0 6px 0; font-size: 1.05rem; font-weight: 800; color: #111;">
+    2.1 Retrieval Performance (BEIR Benchmark)
+  </h3>
+
+  <p style="margin: 0 0 10px 0; color: #111; line-height: 1.6;">Semantic retrieval outperformed pure BM25:</p>
+
+  <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 8px 0;">
+    <table style="width: auto; min-width: 620px; border-collapse: collapse; font-size: 0.92rem;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">Dataset</th>
+          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">Method</th>
+          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">nDCG@10</th>
+          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">MAP@10</th>
+          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">Recall@100</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">SciFact</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">BM25</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.5178</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.4760</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.7896</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">SciFact</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">Semantic</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.6451</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.5959</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.9250</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">NFCorpus</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">BM25</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.3804</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.3415</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.6827</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">NFCorpus</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">Semantic</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.4686</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.4317</td>
+          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.8541</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="sec4" style="margin: 18px 0 8px 0; font-size: 1.35rem; font-weight: 800; color: #111;">
+    4. References
+  </h2>
+
+  <ul style="padding-left: 1.2rem; margin: 0.5rem 0 0 0; list-style-type: disc; line-height: 1.6;">
+    <li style="margin: 0.35rem 0;">
+      Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W. T., Rocktäschel, T., Riedel, S., &amp; Kiela, D. (2020).
+      <em>Retrieval-augmented generation for knowledge-intensive NLP tasks</em>. NeurIPS 2020.<br/>
+      <a href="https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html" target="_blank" rel="noopener noreferrer" style="word-break: break-word;">
+        https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
+      </a>
+    </li>
+  </ul>
+
+</div>
