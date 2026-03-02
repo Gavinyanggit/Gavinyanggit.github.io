@@ -1,155 +1,258 @@
+---
+layout: default
+title: Retrieval-Augmented Generation (RAG) for Older Adult Mobility and Health Information
+permalink: /RAG-older-adult-mobility/
+---
 
-<!-- Production-ready Jekyll page:
-     - No <style> block (avoids theme conflicts)
-     - Inline styles only
-     - Keeps your theme top nav + left sidebar because of layout: default
--->
+<article class="rag-page">
+  <header class="rag-page__hero">
+    <p class="rag-page__eyebrow">Research Project</p>
+    <h1 class="page_title rag-page__title">
+      Retrieval-Augmented Generation (RAG) for Older Adult Mobility and Health Information
+    </h1>
+    <div class="rag-page__meta">
+      <span><strong>Author:</strong> Jia Yang</span>
+      <span><strong>Supervisor:</strong> Dr. Rong Zheng</span>
+      <span><strong>Institution:</strong> McMaster University</span>
+    </div>
+    <p class="rag-page__summary">
+      This project develops a citation-grounded retrieval-augmented generation system that helps older adults access
+      trustworthy mobility and health information with clearer answers and safer evidence use.
+    </p>
+  </header>
 
-<div style="max-width: 980px; margin: 0; padding: 0;">
+  <nav class="rag-page__toc" aria-label="Table of contents">
+    <h2>Table of Contents</h2>
+    <ol class="page_guide">
+      <li><a href="#project-description">Project Description and Approach</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#source-code">Source Code</a></li>
+      <li><a href="#references">References</a></li>
+    </ol>
+  </nav>
 
-  <h1 style="margin: 0 0 10px 0; line-height: 1.2; font-size: 2rem; font-weight: 800; color: #111;">
-    Retrieval-Augmented Generation (RAG) for Older Adult Mobility and Health Information
-  </h1>
+  <section class="rag-section" id="project-description">
+    <h2>1. Project Description and Approach</h2>
 
-  <div style="margin: 0 0 14px 0; font-size: 0.95rem; color: #111;">
-    <div><strong>Author:</strong> Jia Yang</div>
-    <div><strong>Supervisor:</strong> Dr. Rong Zheng</div>
-    <div><strong>Institution:</strong> McMaster University</div>
-  </div>
-
-  <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 18px 0;" />
-
-  <h2 style="margin: 0 0 10px 0; font-size: 1.35rem; font-weight: 800; color: #111;">Table of Contents</h2>
-  <ol style="padding-left: 1.2rem; margin: 0.4rem 0 0.9rem 0; line-height: 1.6;">
-    <li style="margin: 0.15rem 0;">
-      <a href="#sec1" style="text-decoration: none;">Project Description and Approach</a>
-      <ul style="padding-left: 1.2rem; margin: 0.35rem 0 0.5rem 0; list-style-type: disc;">
-        <li style="margin: 0.1rem 0;"><a href="#sec1-1" style="text-decoration: none;">Motivation</a></li>
-        <li style="margin: 0.1rem 0;"><a href="#sec1-2" style="text-decoration: none;">System Overview</a></li>
-        <li style="margin: 0.1rem 0;"><a href="#sec1-3" style="text-decoration: none;">Key Design Features</a></li>
-        <li style="margin: 0.1rem 0;"><a href="#sec1-4" style="text-decoration: none;">Architecture Components</a></li>
+    <div class="rag-card">
+      <h3>1.1 Motivation</h3>
+      <p>
+        Older adults increasingly rely on online resources for health information related to mobility, fall prevention,
+        balance training, and rehabilitation. However:
+      </p>
+      <ul>
+        <li>Search engines often return fragmented or unreliable results.</li>
+        <li>Large Language Models (LLMs) may generate fluent but unverified responses.</li>
+        <li>Health misinformation can negatively impact safety and decision-making.</li>
       </ul>
-    </li>
-    <li style="margin: 0.15rem 0;">
-      <a href="#sec2" style="text-decoration: none;">Results</a>
-      <ul style="padding-left: 1.2rem; margin: 0.35rem 0 0.5rem 0; list-style-type: disc;">
-        <li style="margin: 0.1rem 0;"><a href="#sec2-1" style="text-decoration: none;">Retrieval Performance (BEIR Benchmark)</a></li>
-        <li style="margin: 0.1rem 0;"><a href="#sec2-2" style="text-decoration: none;">Local vs Web Retrieval</a></li>
-        <li style="margin: 0.1rem 0;"><a href="#sec2-3" style="text-decoration: none;">Qualitative Evaluation</a></li>
+      <p>
+        This project develops a reliable, citation-grounded <strong>Retrieval-Augmented Generation (RAG)</strong>
+        system designed specifically for older-adult mobility and health information.
+      </p>
+    </div>
+
+    <div class="rag-card">
+      <h3>1.2 System Overview</h3>
+      <p>The system integrates:</p>
+      <ul class="rag-feature-list">
+        <li><strong>BM25</strong> lexical retrieval</li>
+        <li><strong>Cross-encoder</strong> semantic reranking</li>
+        <li><strong>Relevance-gating mechanism</strong> (cross-encoder threshold tau = 0.6)</li>
+        <li><strong>Google Search API</strong> web fallback</li>
+        <li><strong>LLM-based</strong> answer generation with explicit citations</li>
       </ul>
-    </li>
-    <li style="margin: 0.15rem 0;"><a href="#sec3" style="text-decoration: none;">Source Code</a></li>
-    <li style="margin: 0.15rem 0;"><a href="#sec4" style="text-decoration: none;">References</a></li>
-  </ol>
 
-  <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 18px 0;" />
+      <h4>Pipeline Workflow</h4>
+      <ol class="rag-steps">
+        <li>User submits a natural-language query.</li>
+        <li>BM25 retrieves top-k passages from a curated MongoDB corpus.</li>
+        <li>A cross-encoder reranks candidate passages.</li>
+        <li>A relevance gate decides whether to use local evidence or trigger web fallback.</li>
+        <li>The LLM generates a plain-language answer with citations.</li>
+      </ol>
+    </div>
 
-  <h2 id="sec1" style="margin: 0 0 8px 0; font-size: 1.35rem; font-weight: 800; color: #111;">
-    1. Project Description and Approach
-  </h2>
+    <div class="rag-grid">
+      <div class="rag-card">
+        <h3>1.3 Key Design Features</h3>
+        <ul>
+          <li>Curated corpus of trusted health documents</li>
+          <li>Explicit source citations in every response</li>
+          <li>Plain-language output tailored for older adults</li>
+          <li>Safety-aware prompts with medical disclaimers</li>
+          <li>Modular Python implementation</li>
+        </ul>
+      </div>
 
-  <h3 id="sec1-1" style="margin: 10px 0 6px 0; font-size: 1.05rem; font-weight: 800; color: #111;">
-    1.1 Motivation
-  </h3>
+      <div class="rag-card">
+        <h3>1.4 Architecture Components</h3>
+        <ul>
+          <li>Crawler Layer (PDF and web ingestion)</li>
+          <li>Retrieval Layer (BM25)</li>
+          <li>Reranking Layer (Cross-encoder)</li>
+          <li>Decision Layer (Relevance Gate)</li>
+          <li>Generation Layer (LLM synthesis)</li>
+          <li>User Interface Layer (CLI, Flask API, Streamlit UI)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <p style="margin: 0 0 10px 0; color: #111; line-height: 1.6;">
-    Older adults increasingly rely on online resources for health information related to mobility, fall prevention,
-    balance training, and rehabilitation. However:
-  </p>
+  <section class="rag-section" id="results">
+    <h2>2. Results</h2>
 
-  <ul style="padding-left: 1.2rem; margin: 0.4rem 0 0.9rem 0; list-style-type: disc; line-height: 1.6;">
-    <li style="margin: 0.15rem 0;">Search engines often return fragmented or unreliable results.</li>
-    <li style="margin: 0.15rem 0;">Large Language Models (LLMs) may generate fluent but unverified responses.</li>
-    <li style="margin: 0.15rem 0;">Health misinformation can negatively impact safety and decision-making.</li>
-  </ul>
+    <div class="rag-card">
+      <h3>2.1 Retrieval Performance (BEIR Benchmark)</h3>
+      <p>Semantic retrieval outperformed pure BM25.</p>
+      <div class="rag-table-wrap">
+        <table class="rag-table">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Method</th>
+              <th>nDCG@10</th>
+              <th>MAP@10</th>
+              <th>Recall@100</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SciFact</td>
+              <td>BM25</td>
+              <td>0.5178</td>
+              <td>0.4760</td>
+              <td>0.7896</td>
+            </tr>
+            <tr>
+              <td>SciFact</td>
+              <td>Semantic</td>
+              <td>0.6451</td>
+              <td>0.5959</td>
+              <td>0.9250</td>
+            </tr>
+            <tr>
+              <td>NFCorpus</td>
+              <td>BM25</td>
+              <td>0.3804</td>
+              <td>0.3415</td>
+              <td>0.6827</td>
+            </tr>
+            <tr>
+              <td>NFCorpus</td>
+              <td>Semantic</td>
+              <td>0.4686</td>
+              <td>0.4317</td>
+              <td>0.8541</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="rag-note">
+        A hybrid BM25 plus cross-encoder pipeline balances computational efficiency with semantic precision.
+      </p>
+    </div>
 
-  <p style="margin: 0 0 14px 0; color: #111; line-height: 1.6;">
-    This project develops a reliable, citation-grounded <strong>Retrieval-Augmented Generation (RAG)</strong> system
-    designed specifically for older-adult mobility and health information.
-  </p>
+    <div class="rag-grid">
+      <div class="rag-card">
+        <h3>2.2 Local vs Web Retrieval</h3>
+        <div class="rag-table-wrap">
+          <table class="rag-table">
+            <thead>
+              <tr>
+                <th>Query Type</th>
+                <th>Local CE</th>
+                <th>Web CE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>In-domain</td>
+                <td>~0.997</td>
+                <td>~0.892</td>
+              </tr>
+              <tr>
+                <td>Out-of-domain</td>
+                <td>~0.00002</td>
+                <td>~0.958</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          These results show strong domain sensitivity and reliable fallback behavior for out-of-scope queries.
+        </p>
+      </div>
 
-  <h3 id="sec1-2" style="margin: 14px 0 6px 0; font-size: 1.05rem; font-weight: 800; color: #111;">
-    1.2 System Overview
-  </h3>
+      <div class="rag-card">
+        <h3>2.3 Qualitative Evaluation</h3>
+        <p>Evaluation using real-world older-adult mobility queries demonstrates:</p>
+        <ul>
+          <li>Evidence-grounded responses</li>
+          <li>High in-domain relevance</li>
+          <li>Appropriate fallback behavior</li>
+          <li>Clear citation display</li>
+          <li>Inclusion of safety disclaimers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <p style="margin: 0 0 8px 0; color: #111; line-height: 1.6;">The system integrates:</p>
+  <section class="rag-section" id="source-code">
+    <h2>3. Source Code</h2>
+    <div class="rag-card">
+      <p>
+        The full implementation, retrieval pipeline, and deployment instructions are maintained in a private GitHub
+        repository.
+      </p>
+      <p>
+        <a href="https://github.com/Gavinyanggit/RAG-older-adult-mobility" target="_blank" rel="noopener noreferrer">
+          View GitHub Repository
+        </a>
+      </p>
+    </div>
+  </section>
 
-  <ul style="padding-left: 1.2rem; margin: 0.4rem 0 0.9rem 0; list-style-type: disc; line-height: 1.6;">
-    <li style="margin: 0.15rem 0;"><strong>BM25</strong> lexical retrieval</li>
-    <li style="margin: 0.15rem 0;"><strong>Cross-encoder</strong> semantic reranking</li>
-    <li style="margin: 0.15rem 0;"><strong>Relevance-gating mechanism</strong> (CE threshold τ = 0.6)</li>
-    <li style="margin: 0.15rem 0;"><strong>Google Search API</strong> web fallback</li>
-    <li style="margin: 0.15rem 0;"><strong>LLM-based</strong> answer generation with explicit citations</li>
-  </ul>
-
-  <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 18px 0;" />
-
-  <h2 id="sec2" style="margin: 0 0 8px 0; font-size: 1.35rem; font-weight: 800; color: #111;">
-    2. Results
-  </h2>
-
-  <h3 id="sec2-1" style="margin: 10px 0 6px 0; font-size: 1.05rem; font-weight: 800; color: #111;">
-    2.1 Retrieval Performance (BEIR Benchmark)
-  </h3>
-
-  <p style="margin: 0 0 10px 0; color: #111; line-height: 1.6;">Semantic retrieval outperformed pure BM25:</p>
-
-  <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 8px 0;">
-    <table style="width: auto; min-width: 620px; border-collapse: collapse; font-size: 0.92rem;">
-      <thead>
-        <tr>
-          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">Dataset</th>
-          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">Method</th>
-          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">nDCG@10</th>
-          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">MAP@10</th>
-          <th style="border: 1px solid #e5e7eb; padding: 6px 10px; background: #f3f4f6; text-align: left; white-space: nowrap;">Recall@100</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">SciFact</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">BM25</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.5178</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.4760</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.7896</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">SciFact</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">Semantic</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.6451</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.5959</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.9250</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">NFCorpus</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">BM25</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.3804</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.3415</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.6827</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">NFCorpus</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">Semantic</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.4686</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.4317</td>
-          <td style="border: 1px solid #e5e7eb; padding: 6px 10px;">0.8541</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2 id="sec4" style="margin: 18px 0 8px 0; font-size: 1.35rem; font-weight: 800; color: #111;">
-    4. References
-  </h2>
-
-  <ul style="padding-left: 1.2rem; margin: 0.5rem 0 0 0; list-style-type: disc; line-height: 1.6;">
-    <li style="margin: 0.35rem 0;">
-      Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W. T., Rocktäschel, T., Riedel, S., &amp; Kiela, D. (2020).
-      <em>Retrieval-augmented generation for knowledge-intensive NLP tasks</em>. NeurIPS 2020.<br/>
-      <a href="https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html" target="_blank" rel="noopener noreferrer" style="word-break: break-word;">
-        https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
-      </a>
-    </li>
-  </ul>
-
-</div>
+  <section class="rag-section" id="references">
+    <h2>4. References</h2>
+    <div class="rag-card">
+      <ul class="rag-reference-list">
+        <li>
+          Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Kuttler, H., Lewis, M., Yih, W. T.,
+          Rocktaschel, T., Riedel, S., and Kiela, D. (2020). <em>Retrieval-augmented generation for knowledge-intensive
+          NLP tasks</em>. NeurIPS 2020.
+          <a href="https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html" target="_blank" rel="noopener noreferrer">Paper link</a>
+        </li>
+        <li>
+          Robertson, S., and Zaragoza, H. (2009). <em>The probabilistic relevance framework: BM25 and beyond</em>.
+          <a href="https://doi.org/10.1561/1500000019" target="_blank" rel="noopener noreferrer">DOI</a>
+        </li>
+        <li>
+          Nogueira, R., and Cho, K. (2019). <em>Passage re-ranking with BERT</em>.
+          <a href="https://arxiv.org/abs/1901.04085" target="_blank" rel="noopener noreferrer">arXiv</a>
+        </li>
+        <li>
+          OpenAI. (2023). <em>GPT-4 technical report</em>.
+          <a href="https://arxiv.org/abs/2303.08774" target="_blank" rel="noopener noreferrer">arXiv</a>
+        </li>
+        <li>
+          Izacard, G., and Grave, E. (2021). <em>Leveraging passage retrieval with generative models for open-domain
+          question answering</em>.
+          <a href="https://arxiv.org/abs/2007.01282" target="_blank" rel="noopener noreferrer">arXiv</a>
+        </li>
+        <li>
+          Thakur, N., Reimers, N., Ruckle, A., Srivastava, A., and Gurevych, I. (2021). <em>BEIR: A heterogeneous
+          benchmark for zero-shot evaluation of information retrieval models</em>.
+          <a href="https://arxiv.org/abs/2104.08663" target="_blank" rel="noopener noreferrer">arXiv</a>
+        </li>
+        <li>
+          National Institute on Aging. (2023). <em>Falls and falls prevention</em>.
+          <a href="https://www.nia.nih.gov/health/falls-and-falls-prevention" target="_blank" rel="noopener noreferrer">Resource</a>
+        </li>
+        <li>
+          World Health Organization. (2022). <em>Healthy ageing</em>.
+          <a href="https://www.who.int/health-topics/ageing" target="_blank" rel="noopener noreferrer">Resource</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</article>
