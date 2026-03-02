@@ -4,82 +4,42 @@ title: RAG for Older Adult Mobility and Health Information
 ---
 
 <style>
-/* Page-scoped fixes for Jekyll Minimal theme (NO SCSS changes needed) */
-.rag-page { 
-  font-size: 16px; 
-  line-height: 1.7; 
-  color: #1f2937;
+/* Page-scoped fixes (NO SCSS changes needed) */
+.rag-page{
+  font-size:16px;
+  line-height:1.7;
+  color:#1f2937;
 }
-.rag-page p, .rag-page li { 
-  font-size: 16px; 
-  line-height: 1.75; 
-}
-.rag-page h1 { 
-  font-size: 32px; 
-  margin-bottom: 6px; 
-}
-.rag-page h2 { 
-  font-size: 22px; 
-  margin-top: 26px; 
-}
-.rag-page h3 { 
-  font-size: 18px; 
-  margin-top: 18px; 
-}
-.rag-meta {
-  margin: 8px 0 14px;
-  font-size: 14px;
-  color: #374151;
-}
-.rag-meta strong { color: #111827; }
-.rag-hr { 
-  border: 0; 
-  border-top: 1px solid #e5e7eb; 
-  margin: 18px 0; 
-}
-.rag-page a {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.rag-page a:hover { opacity: 0.85; }
+.rag-page p,.rag-page li{font-size:16px;line-height:1.75;}
+.rag-page h1{font-size:32px;margin:0 0 8px;}
+.rag-page h2{font-size:22px;margin:26px 0 10px;}
+.rag-page h3{font-size:18px;margin:18px 0 8px;}
+.rag-meta{margin:8px 0 14px;font-size:14px;color:#374151;}
+.rag-meta strong{color:#111827;}
+.rag-hr{border:0;border-top:1px solid #e5e7eb;margin:18px 0;}
 
-/* TOC polish */
-.rag-page .toc { 
-  margin-top: 10px; 
-  padding-left: 18px; 
-}
-.rag-page .toc li { margin: 4px 0; }
+.rag-page a{text-decoration:underline;text-underline-offset:2px;}
+.rag-page a:hover{opacity:.85;}
 
-/* Table polish (still Markdown tables, just better display) */
-.rag-table-wrap { 
-  overflow-x: auto; 
-  margin: 12px 0 18px; 
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+/* Tables (still Markdown tables) */
+.rag-table-wrap{
+  overflow-x:auto;
+  margin:12px 0 18px;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
 }
-.rag-table-wrap table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
+.rag-table-wrap table{width:100%;border-collapse:collapse;font-size:14px;}
+.rag-table-wrap th,.rag-table-wrap td{
+  padding:10px 12px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+  vertical-align:top;
 }
-.rag-table-wrap th, .rag-table-wrap td {
-  padding: 10px 12px;
-  border-bottom: 1px solid #e5e7eb;
-  text-align: left;
-  vertical-align: top;
-}
-.rag-table-wrap th {
-  background: #f9fafb;
-  font-weight: 700;
-}
-.rag-table-wrap tr:last-child td { border-bottom: 0; }
-
-/* Reference list */
-.rag-page .refs li { margin: 10px 0; }
-.rag-page .refs em { font-style: italic; }
+.rag-table-wrap th{background:#f9fafb;font-weight:700;}
+.rag-table-wrap tr:last-child td{border-bottom:0;}
 </style>
 
-<div class="rag-page">
+<div class="rag-page" markdown="1">
 
 # Retrieval-Augmented Generation (RAG) for Older Adult Mobility and Health Information {#top}
 
@@ -93,11 +53,8 @@ title: RAG for Older Adult Mobility and Health Information
 
 ## Table of Contents {#table-of-contents}
 
+* TOC
 {:toc}
-- [Project Description and Approach](#1-project-description-and-approach)
-- [Results](#2-results)
-- [Source Code](#3-source-code)
-- [References](#4-references)
 
 <hr class="rag-hr" />
 
@@ -164,7 +121,7 @@ The system integrates:
 
 Semantic retrieval outperformed BM25:
 
-<div class="rag-table-wrap">
+<div class="rag-table-wrap" markdown="1">
 
 | Dataset   | Method   | nDCG@10 | MAP@10 | Recall@100 |
 |----------|----------|--------:|-------:|-----------:|
@@ -181,7 +138,7 @@ A hybrid BM25 + cross-encoder balances computational efficiency and semantic pre
 
 ### Local vs Web Retrieval {#local-vs-web-retrieval}
 
-<div class="rag-table-wrap">
+<div class="rag-table-wrap" markdown="1">
 
 | Query Type     | Local CE     | Web CE   |
 |---------------|-------------:|---------:|
@@ -216,45 +173,21 @@ The full implementation, retrieval pipeline, and deployment instructions are mai
 
 ## 4. References {#4-references}
 
-<ul class="refs">
+- Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W. T., Rocktäschel, T., Riedel, S., & Kiela, D. (2020). *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.* NeurIPS 2020, 33, 9459–9474.  
+  [Paper link](https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html)
 
-<li>
-Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W. T., Rocktäschel, T., Riedel, S., &amp; Kiela, D. (2020).
-<em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</em>. NeurIPS 2020, 33, 9459–9474.
-<br/>
-<a href="https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html">Paper link</a>
-</li>
+- Izacard, G., & Grave, E. (2021). *Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering.* EACL 2021.  
+  [Paper link](https://arxiv.org/abs/2007.01282)
 
-<li>
-Izacard, G., &amp; Grave, E. (2021).
-<em>Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering</em>. EACL 2021.
-<br/>
-<a href="https://arxiv.org/abs/2007.01282">Paper link</a>
-</li>
+- Nogueira, R., & Cho, K. (2019). *Passage Re-ranking with BERT.* arXiv:1901.04085.  
+  [Paper link](https://arxiv.org/abs/1901.04085)
 
-<li>
-Nogueira, R., &amp; Cho, K. (2019).
-<em>Passage Re-ranking with BERT</em>. arXiv:1901.04085.
-<br/>
-<a href="https://arxiv.org/abs/1901.04085">Paper link</a>
-</li>
+- Thakur, N., Reimers, N., Rücklé, A., Srivastava, A., & Gurevych, I. (2021). *BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models.* NeurIPS 2021.  
+  [Paper link](https://arxiv.org/abs/2104.08663)
 
-<li>
-Thakur, N., Reimers, N., Rücklé, A., Srivastava, A., &amp; Gurevych, I. (2021).
-<em>BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models</em>. NeurIPS 2021.
-<br/>
-<a href="https://arxiv.org/abs/2104.08663">Paper link</a>
-</li>
+- World Health Organization. (2022). *Healthy Ageing.*  
+  [WHO page](https://www.who.int/health-topics/ageing)
 
-<li>
-World Health Organization. (2022).
-<em>Healthy Ageing</em>.
-<br/>
-<a href="https://www.who.int/health-topics/ageing">WHO page</a>
-</li>
-
-</ul>
-
-<p><a href="#top">Back to top ↑</a></p>
+[Back to top ↑](#top)
 
 </div>
