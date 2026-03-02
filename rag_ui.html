@@ -66,6 +66,16 @@ title: RAG for Older Adult Mobility and Health Information
 
 /* References */
 .rag-refs li{margin:10px 0;}
+
+/* Force ordered list markers to include dot (1., 2., 3.) in TOC only */
+.toc-fixed ol { 
+  list-style: decimal !important;
+  padding-left: 1.5rem;
+}
+
+.toc-fixed ol li::marker {
+  content: counter(list-item) ". ";
+}
 </style>
 
 <div class="rag-page">
@@ -82,7 +92,7 @@ title: RAG for Older Adult Mobility and Health Information
 
 <hr class="rag-hr" />
 <h2 id="table-of-contents">Table of Contents</h2>
-
+<div class="toc-fixed">
 <ol style="list-style: decimal outside !important; padding-left: 1.5rem;">
   <li>
     <a href="#1-project-description-and-approach">Project Description and Approach</a>
@@ -106,7 +116,8 @@ title: RAG for Older Adult Mobility and Health Information
   <li><a href="#3-source-code">Source Code</a></li>
   <li><a href="#4-references">References</a></li>
 </ol>
-
+</div>
+  
 <hr class="rag-hr" />
 
 <h2 id="1-project-description-and-approach">1. Project Description and Approach</h2>
