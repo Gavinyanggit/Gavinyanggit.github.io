@@ -140,7 +140,6 @@ This project develops a reliable, citation-grounded Retrieval-Augmented Generati
   <li><strong>Google Search API</strong> web fallback</li>
   <li><strong>LLM-based</strong> answer generation with explicit citations</li>
 </ul>
-
 <h4 id="pipeline-summary">Pipeline Summary</h4>
 
 <ol style="margin-left: 1.25rem;">
@@ -150,15 +149,14 @@ This project develops a reliable, citation-grounded Retrieval-Augmented Generati
 
   <li>
     A relevance gate determines:
-    <ul style="list-style: disc !important; margin: 8px 0 0 1.25rem; padding-left: 1rem;">
-      <li style="list-style: disc !important;"><strong>High CE score</strong> → use local database evidence</li>
-      <li style="list-style: disc !important;"><strong>Low CE score</strong> → trigger web fallback</li>
-    </ul>
+    <div style="margin: 8px 0 0 1.25rem; line-height: 1.8;">
+      • <strong>High CE score</strong> → use local database evidence<br/>
+      • <strong>Low CE score</strong> → trigger web fallback
+    </div>
   </li>
 
   <li>The LLM generates a plain-language answer with citations.</li>
 </ol>
-
 <hr class="rag-hr" />
 
 <h3 id="key-design-features">Key Design Features</h3>
