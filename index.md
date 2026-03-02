@@ -10,6 +10,7 @@
   <li><a href="https://gavinyanggit.github.io/Edge-video-analytics" target="_blank">Edge video analytics</a></li>
   <li><a href="https://gavinyanggit.github.io/Multi-modal-human-motion-synthesizing-and-understanding" target="_blank">Multi-modal human motion synthesizing and understanding</a></li>
   <li><a href="https://gavinyanggit.github.io/RAG-older-adult-mobility-style.html" >RAG for older adult mobility and health information (html) </a></li>
+  <li><a href="https://gavinyanggit.github.io/rag" target="_blank" >rag </a></li>
 </ul>
   </div>
   </div>
