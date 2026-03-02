@@ -1,10 +1,5 @@
----
-layout: default
-title: RAG for Older Adult Mobility and Health Information
----
-
 <style>
-/* Page-scoped fixes (NO SCSS changes needed) */
+
 .rag-page{
   font-size:16px;
   line-height:1.7;
@@ -37,6 +32,26 @@ title: RAG for Older Adult Mobility and Health Information
 }
 .rag-table-wrap th{background:#f9fafb;font-weight:700;}
 .rag-table-wrap tr:last-child td{border-bottom:0;}
+
+/* Fix nested list indentation under numbered steps (Pipeline Summary) */
+.rag-page ol { padding-left: 1.25rem; }
+.rag-page ol > li { margin: 6px 0; }
+
+.rag-page .rag-nested {
+  margin-top: 6px;
+  margin-left: 0;          /* prevent extra right shift */
+  padding-left: 0;         /* remove wrapper padding */
+}
+
+.rag-page .rag-nested ul {
+  margin: 6px 0 0 0;
+  padding-left: 1.1rem;    /* controlled bullet indent */
+  list-style: disc;
+}
+
+.rag-page .rag-nested li {
+  margin: 4px 0;
+}
 </style>
 
 <div class="rag-page" markdown="1">
@@ -87,9 +102,11 @@ The system integrates:
 1. User submits a natural-language query.  
 2. BM25 retrieves top-k passages from a curated MongoDB corpus.  
 3. A cross-encoder reranks candidates.  
-4. A relevance gate determines:  
-   - **High CE score** → use local database evidence  
-   - **Low CE score** → trigger web fallback  
+4. A relevance gate determines:
+<div class="rag-nested" markdown="1">
+- **High CE score** → use local database evidence  
+- **Low CE score** → trigger web fallback  
+</div>
 5. The LLM generates a plain-language answer with citations.
 
 <hr class="rag-hr" />
@@ -174,7 +191,7 @@ The full implementation, retrieval pipeline, and deployment instructions are mai
 ## 4. References {#4-references}
 
 - Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W. T., Rocktäschel, T., Riedel, S., & Kiela, D. (2020). *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.* NeurIPS 2020, 33, 9459–9474.  
-  [Paper link](https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html)
+  https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
 
 - Izacard, G., & Grave, E. (2021). *Leveraging Passage Retrieval with Generative Models for Open-Domain Question Answering.* EACL 2021.  
   [Paper link](https://arxiv.org/abs/2007.01282)
