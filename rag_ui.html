@@ -143,17 +143,19 @@ This project develops a reliable, citation-grounded Retrieval-Augmented Generati
 
 <h4 id="pipeline-summary">Pipeline Summary</h4>
 
-<ol>
+<ol style="margin-left: 1.25rem;">
   <li>User submits a natural-language query.</li>
   <li>BM25 retrieves top-k passages from a curated MongoDB corpus.</li>
   <li>A cross-encoder reranks candidates.</li>
+
   <li>
     A relevance gate determines:
-    <ul>
-      <li><strong>High CE score</strong> → use local database evidence</li>
-      <li><strong>Low CE score</strong> → trigger web fallback</li>
+    <ul style="list-style: disc !important; margin: 8px 0 0 1.25rem; padding-left: 1rem;">
+      <li style="list-style: disc !important;"><strong>High CE score</strong> → use local database evidence</li>
+      <li style="list-style: disc !important;"><strong>Low CE score</strong> → trigger web fallback</li>
     </ul>
   </li>
+
   <li>The LLM generates a plain-language answer with citations.</li>
 </ol>
 
